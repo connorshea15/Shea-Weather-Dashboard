@@ -1,4 +1,6 @@
-// This is the javascript file
+// DOM variable for the input section
+var inputEl = document.querySelector("#input-group");
+var cityNameEl = document.querySelector("#city-name")
 
 // I need to wait on this to see if my shiz becomes active later
 var getWeather = function() {
@@ -14,3 +16,16 @@ var getWeather = function() {
         }
     });
 };
+
+var acceptInput = function(event) {
+    event.preventDefault();
+    
+    // get value from input element
+    var cityName = cityNameEl.value.trim();
+    console.log(cityName);
+
+    // Here I will call the getWeather function and pass the city name
+    // as an argument
+};
+
+inputEl.addEventListener("submit", acceptInput);
