@@ -1,1 +1,9 @@
 /* This is my css file */
+
+h1 {
+    text-align: center;
+}
+
+.border {
+    border: 3px solid black;
+}
