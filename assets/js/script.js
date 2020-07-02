@@ -21,11 +21,14 @@ var acceptInput = function(event) {
     event.preventDefault();
     
     // get value from input element
-    var cityName = cityNameEl.value.trim();
+    var cityName = cityNameEl.value.trim().split(" ").join("");
     console.log(cityName);
+    // Set the input field back to blank state
+    cityNameEl.value = "";
 
     // Here I will call the getWeather function and pass the city name
     // as an argument
 };
 
 inputEl.addEventListener("submit", acceptInput);
+getWeather();
