@@ -4,19 +4,22 @@ var inputEl = document.querySelector("#input-group");
 var cityNameEl = document.querySelector("#city-name");
 // DOM variable for space with today's information
 var todaysWeatherEl = document.querySelector("#todays-forecast");
+// I think I need a global variable for current city
+var currentCity = "";
 
 // Function to handle the user submission
 var formSubmitHandler = function(event) {
     event.preventDefault();
     
     // get value from input element
-    var cityName = cityNameEl.value.trim().split(" ").join("");
+    // var cityName = cityNameEl.value.trim();
+    currentCity = cityNameEl.value.trim();
     // Set the input field back to blank state
     cityNameEl.value = "";
 
     // Here I will call the getCoordinates function and pass the city name
     // as an argument
-    getCoordinates(cityName);
+    getCoordinates(currentCity);
 };
 // I need to wait on this to see if my shiz becomes active later
 var getCoordinates = function(city) {
@@ -40,7 +43,6 @@ var getAllWeather = function(lat, lon) {
     fetch(apiUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-                console.log(data);
                 displayCurrentWeather(data.current);
                 displayFiveDay(data.daily);
             });
@@ -54,8 +56,9 @@ var getAllWeather = function(lat, lon) {
 var displayCurrentWeather = function(currentWeather) {
     // Create div to hold all my today's weather info
     var contentEl = document.createElement("div");
-    contentEl.textContent = currentWeather.temp;
+    contentEl.textContent = currentCity;
     todaysWeatherEl.appendChild(contentEl);
+    console.log(currentWeather);
 };
 
 // function to display today's weather
