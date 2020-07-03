@@ -4,6 +4,8 @@ var inputEl = document.querySelector("#input-group");
 var cityNameEl = document.querySelector("#city-name");
 // DOM variable for space with today's information
 var todaysWeatherEl = document.querySelector("#todays-forecast");
+
+var fiveDayEl = document.querySelector("#five-day-forecast");
 // I think I need a global variable for current city
 var currentCity = "";
 
@@ -54,15 +56,20 @@ var getAllWeather = function(lat, lon) {
 
 // function to display today's weather
 var displayCurrentWeather = function(currentWeather) {
+    // Empty content from the last search
+    todaysWeatherEl.innerHTML = "";
     // Create div to hold all my today's weather info
     var contentEl = document.createElement("div");
-    contentEl.textContent = currentCity;
+    // display all of today's info via innerHTML
+    contentEl.innerHTML = "<h4>" + currentCity + "</h4><p>Temperature: " + currentWeather.temp + " &#8457</p><p>Humidity: " + currentWeather.humidity + "%</p><p>Wind Speed: " + currentWeather.wind_speed + " MPH</p><p>UV Index: " + currentWeather.uvi + "</p>";
+        
+    // Append all of today's info to the today's weather section
     todaysWeatherEl.appendChild(contentEl);
-    console.log(currentWeather);
 };
 
-// function to display today's weather
+// function to display the five day forecast
 var displayFiveDay = function(fiveDayWeather) {
+    var forecastBadge = document.createElement
     console.log(fiveDayWeather);
 };
 
