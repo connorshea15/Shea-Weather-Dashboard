@@ -1,10 +1,39 @@
 // DOM variable for the input section
 var inputEl = document.querySelector("#input-group");
-var cityNameEl = document.querySelector("#city-name")
+// DOM variable for 
+var cityNameEl = document.querySelector("#city-name");
 
+// Function to handle the user submission
+var formSubmitHandler = function(event) {
+    event.preventDefault();
+    
+    // get value from input element
+    var cityName = cityNameEl.value.trim().split(" ").join("");
+    // Set the input field back to blank state
+    cityNameEl.value = "";
+
+    // Here I will call the getWeather function and pass the city name
+    // as an argument
+    getCoordinates(cityName);
+};
 // I need to wait on this to see if my shiz becomes active later
-var getWeather = function() {
-    apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=London&appid=229c1683379f39bf8bd6307cd867b979";
+var getCoordinates = function(city) {
+    apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=055086f19492c21b798cb63cdcd21457";
+
+    fetch(apiUrl).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+                getAllWeather(data.coord.lat, data.coord.lon);
+            });
+        } else {
+            alert("Error: " + response.statusText);
+        }
+    });
+};
+
+// Function to take my lat and long and long and grab onecall with it
+var getAllWeather = function(lat, lon) {
+    apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly&units=imperial&appid=055086f19492c21b798cb63cdcd21457";
 
     fetch(apiUrl).then(function(response) {
         if (response.ok) {
@@ -17,18 +46,14 @@ var getWeather = function() {
     });
 };
 
-var acceptInput = function(event) {
-    event.preventDefault();
-    
-    // get value from input element
-    var cityName = cityNameEl.value.trim().split(" ").join("");
-    console.log(cityName);
-    // Set the input field back to blank state
-    cityNameEl.value = "";
-
-    // Here I will call the getWeather function and pass the city name
-    // as an argument
+// function to display today's weather
+var displayCurrentWeather = function(weatherObj) {
+    console.log(weatherObj);
 };
 
-inputEl.addEventListener("submit", acceptInput);
-getWeather();
+// function to display today's weather
+var displayFiveDay = function(weatherObj) {
+    console.log(weatherObj);
+};
+
+inputEl.addEventListener("submit", formSubmitHandler);
