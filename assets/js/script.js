@@ -12,7 +12,7 @@ var formSubmitHandler = function(event) {
     // Set the input field back to blank state
     cityNameEl.value = "";
 
-    // Here I will call the getWeather function and pass the city name
+    // Here I will call the getCoordinates function and pass the city name
     // as an argument
     getCoordinates(cityName);
 };
