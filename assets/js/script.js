@@ -61,10 +61,11 @@ var displayCurrentWeather = function(currentWeather) {
     // Create div to hold all my today's weather info
     var contentEl = document.createElement("div");
     // display all of today's info via innerHTML
-    contentEl.innerHTML = "<h4>" + currentCity + "</h4><p>Temperature: " + currentWeather.temp + " &#8457</p><p>Humidity: " + currentWeather.humidity + "%</p><p>Wind Speed: " + currentWeather.wind_speed + " MPH</p><p>UV Index: " + currentWeather.uvi + "</p>";
-        
+    contentEl.innerHTML = "<h4>" + currentCity + "<img src='http://openweathermap.org/img/w/" + currentWeather.weather[0].icon + ".png'></img></h4><p>Temperature: " + currentWeather.temp + " &#8457</p><p>Humidity: " + currentWeather.humidity + "%</p><p>Wind Speed: " + currentWeather.wind_speed + " MPH</p><p>UV Index: " + currentWeather.uvi + "</p>";
     // Append all of today's info to the today's weather section
     todaysWeatherEl.appendChild(contentEl);
+    console.log(currentWeather);
+    //<img src='http://openweathermap.org/img/w/" + currentWeather.weather[0].icon + ".png'></img>
 };
 
 // function to display the five day forecast
@@ -76,7 +77,7 @@ var displayFiveDay = function(fiveDayWeather) {
     for (var i = 1; i < 6; i++) {
     var forecastBadge = document.createElement("div");
     forecastBadge.setAttribute("class", "badge badge-primary p-3 text-left");
-    forecastBadge.innerHTML = "<h6>Date Here</h6><p>Icon here</p><p>Temp: " + fiveDayWeather[i].temp.max + " &#8457</p><p>Humidity: " + fiveDayWeather[i].humidity + "%</p>";
+    forecastBadge.innerHTML = "<h6>Date Here</h6><img src='http://openweathermap.org/img/w/" + fiveDayWeather[i].weather[0].icon + ".png'></img><p>Temp: " + fiveDayWeather[i].temp.max + " &#8457</p><p>Humidity: " + fiveDayWeather[i].humidity + "%</p>";
     fiveDayEl.appendChild(forecastBadge);
     }
 
