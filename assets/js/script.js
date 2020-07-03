@@ -8,6 +8,7 @@ var todaysWeatherEl = document.querySelector("#todays-forecast");
 var fiveDayEl = document.querySelector("#five-day-forecast");
 // DOM variable to reference list space for search history
 var cityListEl = document.querySelector("#city-list");
+// DOM variable to reference title above five day forecast
 var fiveDayHeading = document.querySelector("#five-day-title");
 // I think I need a global variable for current city
 var currentCity = "";
@@ -151,5 +152,12 @@ var loadCities = function() {
     }
 };
 
+// function to handle click of search history city
+var cityWeatherAgain = function(event) {
+    currentCity = event.target.textContent;
+    getCoordinates(event.target.textContent);
+};
+
+cityListEl.addEventListener("click", cityWeatherAgain);
 inputEl.addEventListener("submit", formSubmitHandler);
 loadCities();
