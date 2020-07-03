@@ -4,7 +4,7 @@ var inputEl = document.querySelector("#input-group");
 var cityNameEl = document.querySelector("#city-name");
 // DOM variable for space with today's information
 var todaysWeatherEl = document.querySelector("#todays-forecast");
-
+// DOM variable for space with five day forecast
 var fiveDayEl = document.querySelector("#five-day-forecast");
 // I think I need a global variable for current city
 var currentCity = "";
@@ -69,7 +69,17 @@ var displayCurrentWeather = function(currentWeather) {
 
 // function to display the five day forecast
 var displayFiveDay = function(fiveDayWeather) {
-    var forecastBadge = document.createElement
+    // Clear data from previous search
+    fiveDayEl.innerHTML = "";
+    
+    // for loop to get data on all five upcoming days
+    for (var i = 1; i < 6; i++) {
+    var forecastBadge = document.createElement("div");
+    forecastBadge.setAttribute("class", "badge badge-primary p-3 text-left");
+    forecastBadge.innerHTML = "<h6>Date Here</h6><p>Icon here</p><p>Temp: " + fiveDayWeather[i].temp.max + " &#8457</p><p>Humidity: " + fiveDayWeather[i].humidity + "%</p>";
+    fiveDayEl.appendChild(forecastBadge);
+    }
+
     console.log(fiveDayWeather);
 };
 
