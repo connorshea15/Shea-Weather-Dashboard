@@ -2,6 +2,8 @@
 var inputEl = document.querySelector("#input-group");
 // DOM variable for 
 var cityNameEl = document.querySelector("#city-name");
+// DOM variable for space with today's information
+var todaysWeatherEl = document.querySelector("#todays-forecast");
 
 // Function to handle the user submission
 var formSubmitHandler = function(event) {
@@ -39,6 +41,8 @@ var getAllWeather = function(lat, lon) {
         if (response.ok) {
             response.json().then(function(data) {
                 console.log(data);
+                displayCurrentWeather(data.current);
+                displayFiveDay(data.daily);
             });
         } else {
             alert("Error: " + response.statusText);
@@ -47,13 +51,16 @@ var getAllWeather = function(lat, lon) {
 };
 
 // function to display today's weather
-var displayCurrentWeather = function(weatherObj) {
-    console.log(weatherObj);
+var displayCurrentWeather = function(currentWeather) {
+    // Create div to hold all my today's weather info
+    var contentEl = document.createElement("div");
+    contentEl.textContent = currentWeather.temp;
+    todaysWeatherEl.appendChild(contentEl);
 };
 
 // function to display today's weather
-var displayFiveDay = function(weatherObj) {
-    console.log(weatherObj);
+var displayFiveDay = function(fiveDayWeather) {
+    console.log(fiveDayWeather);
 };
 
 inputEl.addEventListener("submit", formSubmitHandler);
