@@ -30,14 +30,6 @@ var formSubmitHandler = function(event) {
     // Here I will call the getCoordinates function and pass the city name
     // as an argument
     getCoordinates(currentCity);
-
-    // conditional to append and save city only if it is not listed yet
-    if (listedCities.includes(currentCity) && currentCity) {
-        return;
-    } else {
-        // Function to append city to search history and save to local storage
-        listCity(currentCity);
-    }
 };
 // I need to wait on this to see if my shiz becomes active later
 var getCoordinates = function(city) {
@@ -47,7 +39,17 @@ var getCoordinates = function(city) {
         if (response.ok) {
             response.json().then(function(data) {
                 getAllWeather(data.coord.lat, data.coord.lon);
+
+                // conditional to append and save city only if it is not listed yet
+                // Put this in here so no erroneous inputs get saved to local storage
+                if (listedCities.includes(currentCity)) {
+                    return;
+                } else {
+                    // Function to append city to search history and save to local storage
+                    listCity(currentCity);
+                }
             });
+
         } else {
             alert("Error: " + response.statusText);
         }
@@ -94,8 +96,6 @@ var displayCurrentWeather = function(currentWeather) {
     } else if (currentWeather.uvi > 11) {
         uvIndexColor.setAttribute("class", "badge badge-danger");
     }
-    
-    console.log(currentWeather);
 };
 
 // function to display the five day forecast
