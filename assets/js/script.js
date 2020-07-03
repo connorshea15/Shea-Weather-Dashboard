@@ -30,8 +30,13 @@ var formSubmitHandler = function(event) {
     // as an argument
     getCoordinates(currentCity);
 
-    // Function to append city to search history and save to local storage
-    listCity(currentCity);
+    // conditional to append and save city only if it is not listed yet
+    if (listedCities.includes(currentCity)) {
+        return;
+    } else {
+        // Function to append city to search history and save to local storage
+        listCity(currentCity);
+    }
 };
 // I need to wait on this to see if my shiz becomes active later
 var getCoordinates = function(city) {
@@ -135,7 +140,7 @@ var loadCities = function() {
         listedCities = [];
     }
 
-    // Loop through our saved tasks and assign text to proper textareas
+    // Loop through our saved cities and add to the search history
     for (i = 0; i < listedCities.length; i++) {
         // Create new list element
         var newCityEl = document.createElement("li");
