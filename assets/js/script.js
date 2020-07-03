@@ -6,10 +6,15 @@ var cityNameEl = document.querySelector("#city-name");
 var todaysWeatherEl = document.querySelector("#todays-forecast");
 // DOM variable for space with five day forecast
 var fiveDayEl = document.querySelector("#five-day-forecast");
+// DOM variable to reference list space for search history
+var cityListEl = document.querySelector("#city-list");
+var fiveDayHeading = document.querySelector("#five-day-title");
 // I think I need a global variable for current city
 var currentCity = "";
 // today's date
 var today = moment().format("M/D/YYYY");
+// Array to hold my search history
+var listedCities = [];
 
 // Function to handle the user submission
 var formSubmitHandler = function(event) {
@@ -24,6 +29,9 @@ var formSubmitHandler = function(event) {
     // Here I will call the getCoordinates function and pass the city name
     // as an argument
     getCoordinates(currentCity);
+
+    // Function to append city to search history and save to local storage
+    listCity(currentCity);
 };
 // I need to wait on this to see if my shiz becomes active later
 var getCoordinates = function(city) {
@@ -89,6 +97,7 @@ var displayFiveDay = function(fiveDayWeather) {
     // Clear data from previous search
     fiveDayEl.innerHTML = "";
     
+    fiveDayHeading.textContent = "Five Day Forecast";
     // for loop to get data on all five upcoming days
     for (var i = 1; i < 6; i++) {
     var forecastDate = moment().add(i, 'days').format("M/D/YYYY");
@@ -101,4 +110,41 @@ var displayFiveDay = function(fiveDayWeather) {
     console.log(fiveDayWeather);
 };
 
+var listCity = function(cityName) {
+    // Create new list element
+    var newCityEl = document.createElement("li");
+    // assign new city name to new list element
+    newCityEl.textContent = cityName;
+    newCityEl.setAttribute("class", "list-group-item");
+    cityListEl.appendChild(newCityEl);
+    listedCities.push(cityName);
+    saveCities();
+};
+
+// Save a searched city to local storage
+var saveCities = function() {
+    localStorage.setItem("listedCities", JSON.stringify(listedCities));
+};
+
+// load saved cities after page refresh
+var loadCities = function() {
+    listedCities = JSON.parse(localStorage.getItem("listedCities"));
+
+    // if local storage is null, recreate the array to hold tasks
+    if (!listedCities) {
+        listedCities = [];
+    }
+
+    // Loop through our saved tasks and assign text to proper textareas
+    for (i = 0; i < listedCities.length; i++) {
+        // Create new list element
+        var newCityEl = document.createElement("li");
+        // assign new city name to new list element
+        newCityEl.textContent = listedCities[i];
+        newCityEl.setAttribute("class", "list-group-item");
+        cityListEl.appendChild(newCityEl);
+    }
+};
+
 inputEl.addEventListener("submit", formSubmitHandler);
+loadCities();
