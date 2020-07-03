@@ -32,7 +32,7 @@ var formSubmitHandler = function(event) {
     getCoordinates(currentCity);
 
     // conditional to append and save city only if it is not listed yet
-    if (listedCities.includes(currentCity)) {
+    if (listedCities.includes(currentCity) && currentCity) {
         return;
     } else {
         // Function to append city to search history and save to local storage
@@ -108,12 +108,10 @@ var displayFiveDay = function(fiveDayWeather) {
     for (var i = 1; i < 6; i++) {
     var forecastDate = moment().add(i, 'days').format("M/D/YYYY");
     var forecastBadge = document.createElement("div");
-    forecastBadge.setAttribute("class", "badge badge-primary p-3 text-left");
+    forecastBadge.setAttribute("class", "badge badge-primary p-3 mb-3 text-left");
     forecastBadge.innerHTML = "<h6>" + forecastDate + "</h6><img src='http://openweathermap.org/img/w/" + fiveDayWeather[i].weather[0].icon + ".png'></img><p>Temp: " + fiveDayWeather[i].temp.max + " &#8457</p><p>Humidity: " + fiveDayWeather[i].humidity + "%</p>";
     fiveDayEl.appendChild(forecastBadge);
     }
-
-    console.log(fiveDayWeather);
 };
 
 var listCity = function(cityName) {

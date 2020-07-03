@@ -15,9 +15,9 @@
   </header>
   <main>
     <!-- Container to hold all information -->
-    <div class="container border w-auto p-3">
+    <div class="container w-auto p-3">
       <div class="row">
-        <div class="col-3 border bg-light">
+        <div class="col-lg-3 col-md-12 bg-light">
           <h3>Search for a City:</h3>
           <form class="input-group" id="input-group">
             <input type="text" id="city-name" placeholder="Name a City">
@@ -29,12 +29,12 @@
           <!-- This unordered list will hold my search history -->
           <ul class="list-group" id="city-list"></ul>
         </div>
-        <div class="col-9 border">
+        <div class="col-lg-9 col-md-12">
           <!-- This div will hold all today's information -->
-          <div class="border" id="todays-forecast"></div>
+          <div id="todays-forecast"></div>
           <h5 id="five-day-title"></h5>
           <!-- This is where the five day forecast will go -->
-          <div class="border d-flex flex-row justify-content-around align-items-center p-3" id="five-day-forecast">
+          <div class="d-flex flex-row justify-content-around align-items-center p-3 flex-wrap" id="five-day-forecast">
           </div>
         </div>
       </div>
