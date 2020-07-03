@@ -63,11 +63,25 @@ var displayCurrentWeather = function(currentWeather) {
     // Create div to hold all my today's weather info
     var contentEl = document.createElement("div");
     // display all of today's info via innerHTML
-    contentEl.innerHTML = "<h4>" + currentCity + " (" + today + ") <img src='http://openweathermap.org/img/w/" + currentWeather.weather[0].icon + ".png'></img></h4><p>Temperature: " + currentWeather.temp + " &#8457</p><p>Humidity: " + currentWeather.humidity + "%</p><p>Wind Speed: " + currentWeather.wind_speed + " MPH</p><p>UV Index: " + currentWeather.uvi + "</p>";
+    contentEl.innerHTML = "<h4>" + currentCity + " (" + today + ") <img src='http://openweathermap.org/img/w/" + currentWeather.weather[0].icon + ".png'></img></h4><p>Temperature: " + currentWeather.temp + " &#8457</p><p>Humidity: " + currentWeather.humidity + "%</p><p>Wind Speed: " + currentWeather.wind_speed + " MPH</p><p>UV Index: <span id='uv-index'>" + currentWeather.uvi + "</span></p>";
     // Append all of today's info to the today's weather section
     todaysWeatherEl.appendChild(contentEl);
+
+    // DOM variable to represent the uv index span
+    var uvIndexColor = document.getElementById("uv-index");
+
+    // conditional to color my uv index
+    if (currentWeather.uvi < 6) {
+        uvIndexColor.setAttribute("class", "badge badge-info");
+    } else if (currentWeather.uvi > 6 && currentWeather.uvi < 8) {
+        uvIndexColor.setAttribute("class", "badge badge-success");
+    } else if (currentWeather.uvi > 8 && currentWeather.uvi < 11) {
+        uvIndexColor.setAttribute("class", "badge badge-warning");
+    } else if (currentWeather.uvi > 11) {
+        uvIndexColor.setAttribute("class", "badge badge-danger");
+    }
+    
     console.log(currentWeather);
-    //<img src='http://openweathermap.org/img/w/" + currentWeather.weather[0].icon + ".png'></img>
 };
 
 // function to display the five day forecast
